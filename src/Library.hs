@@ -1,5 +1,6 @@
 module Library where
 import PdePreludat
+import GHC.IO.Handle.Types (Handle__(haBufferMode))
 
 data Ingrediente =
     Carne | Pan | Panceta | Cheddar | Pollo | Curry | QuesoDeAlmendras
@@ -39,3 +40,6 @@ agrandar hamburguesa ingredienteBase
 
 agregarIngrediente :: Ingrediente -> [Ingrediente] -> [Ingrediente]
 agregarIngrediente ingrediente listaIngredientes = ingrediente : listaIngredientes
+
+descuento :: Number -> Hamburguesa -> Hamburguesa
+descuento porcentaje hamburguesa = hamburguesa {precioBase = precioBase hamburguesa - (precioBase hamburguesa * porcentaje / 100)}
