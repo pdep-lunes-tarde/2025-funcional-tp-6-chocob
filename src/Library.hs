@@ -27,3 +27,15 @@ precioFinal hamburguesa = sumatoriaIngredientes hamburguesa + precioBase hamburg
 
 sumatoriaIngredientes :: Hamburguesa -> Number
 sumatoriaIngredientes hamburguesa = sum . map precioIngrediente $ ingredientes hamburguesa 
+
+-- agrandar: cada vez que se agranda una hamburguesa se agrega otro ingrediente base
+-- (por ahora, son Carne o Pollo), se elige el ingrediente base a agregar según lo que ya haya en la hamburguesa 
+-- (si había carne se agrega carne, si había pollo se agrega pollo, si había ambos da igual cuál se agregue).
+agrandar :: Hamburguesa -> Ingrediente -> Hamburguesa
+agrandar hamburguesa ingredienteBase
+    | ingredienteBase == Carne || ingredienteBase == Pollo = 
+        hamburguesa {ingredientes = agregar ingredienteBase (ingredientes hamburguesa)}
+    | otherwise = hamburguesa
+
+agregar :: Ingrediente -> [Ingrediente] -> [Ingrediente]
+agregar ingrediente listaIngredientes = ingrediente : listaIngredientes
