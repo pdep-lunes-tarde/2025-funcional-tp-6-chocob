@@ -34,8 +34,8 @@ sumatoriaIngredientes hamburguesa = sum . map precioIngrediente $ ingredientes h
 agrandar :: Hamburguesa -> Ingrediente -> Hamburguesa
 agrandar hamburguesa ingredienteBase
     | ingredienteBase == Carne || ingredienteBase == Pollo = 
-        hamburguesa {ingredientes = agregar ingredienteBase (ingredientes hamburguesa)}
+        hamburguesa {ingredientes = agregarIngrediente ingredienteBase (ingredientes hamburguesa)}
     | otherwise = hamburguesa
 
-agregar :: Ingrediente -> [Ingrediente] -> [Ingrediente]
-agregar ingrediente listaIngredientes = ingrediente : listaIngredientes
+agregarIngrediente :: Ingrediente -> [Ingrediente] -> [Ingrediente]
+agregarIngrediente ingrediente listaIngredientes = ingrediente : listaIngredientes
