@@ -32,12 +32,19 @@ sumatoriaIngredientes hamburguesa = sum . map precioIngrediente $ ingredientes h
 agrandar :: Hamburguesa -> Hamburguesa
 agrandar hamburguesa
     | Carne `elem` ingredientes hamburguesa = 
-        hamburguesa {ingredientes = agregarSegundo Carne (ingredientes hamburguesa)}
+        agregarIngrediente Carne hamburguesa
     | otherwise = 
-        hamburguesa {ingredientes = agregarSegundo Pollo (ingredientes hamburguesa)}
+        agregarIngrediente Pollo hamburguesa
+
+agregarIngrediente :: Ingrediente -> Hamburguesa -> Hamburguesa
+agregarIngrediente ingrediente hamburguesa = hamburguesa {ingredientes = agregarSegundo ingrediente (ingredientes hamburguesa)}
 
 agregarSegundo :: Ingrediente -> [Ingrediente] -> [Ingrediente]
 agregarSegundo ingrediente (cabeza:cola) = cabeza : ingrediente : cola 
+
+-- Entiendo que esto quedo completamente declarativo en la funcion agrandar, yo hubiese trabajado directamente con la funcion agregarSegundo
+-- sin embargo cree agregarIngrediente porque no correspondia con el pedido del enciado 
+-- (recibir un ingrediente y una hamburguesa y devolver una hamburguesa)
 
 -- Version previa de agrandar
 -- agrandar :: Hamburguesa -> Ingrediente -> Hamburguesa
