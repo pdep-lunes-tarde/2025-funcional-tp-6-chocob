@@ -38,6 +38,8 @@ agrandar :: Hamburguesa -> Hamburguesa
 agrandar hamburguesa
     | Carne `elem` ingredientes hamburguesa = 
         agregarIngrediente Carne hamburguesa
+    | PatiVegano `elem` ingredientes hamburguesa =
+        agregarIngrediente PatiVegano hamburguesa
     | otherwise = 
         agregarIngrediente Pollo hamburguesa
 
@@ -78,3 +80,24 @@ bigPdep = agregarIngrediente Curry dobleCuarto
 
 delDia :: Hamburguesa -> Hamburguesa
 delDia = agregarIngrediente Papas . descuento 30
+
+hacerVeggie ::Hamburguesa -> Hamburguesa
+hacerVeggie hamburguesa = hamburguesa {ingredientes = map vivirDeEnsalada (ingredientes hamburguesa)}
+
+vivirDeEnsalada :: Ingrediente -> Ingrediente
+vivirDeEnsalada ingrediente
+    | ingrediente == Carne || ingrediente == Pollo = PatiVegano
+    | ingrediente == Cheddar = QuesoDeAlmendras
+    | ingrediente == Panceta = BaconDeTofu
+    | otherwise = ingrediente
+
+cambiarPanDePati :: Hamburguesa -> Hamburguesa
+cambiarPanDePati hamburguesa = hamburguesa {ingredientes = map cambiarPan (ingredientes hamburguesa)}
+
+cambiarPan :: Ingrediente -> Ingrediente
+cambiarPan ingrediente
+    | ingrediente == Pan = PanIntegral
+    | otherwise = ingrediente
+        
+dobleCuartoVegano :: Hamburguesa
+dobleCuartoVegano = hacerVeggie . cambiarPanDePati $ dobleCuarto
