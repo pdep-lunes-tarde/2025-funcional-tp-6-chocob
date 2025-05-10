@@ -59,3 +59,5 @@ agregarSegundo ingrediente (cabeza:cola) = cabeza : ingrediente : cola
 descuento :: Number -> Hamburguesa -> Hamburguesa
 descuento porcentaje hamburguesa = hamburguesa {precioBase = precioBase hamburguesa - (precioBase hamburguesa * porcentaje / 100)}
 
+pdpBurger :: Hamburguesa
+pdpBurger = descuento 20 . agregarIngrediente Cheddar . agrandar . agregarIngrediente Panceta . agrandar $ cuartoDeLibra 
