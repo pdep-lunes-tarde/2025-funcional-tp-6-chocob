@@ -21,7 +21,7 @@ data Hamburguesa = Hamburguesa {
 } deriving (Eq, Show)
 
 cuartoDeLibra :: Hamburguesa
-cuartoDeLibra = Hamburguesa { precioBase = 20, ingredientes = [Carne,Pan,Cheddar,Pan] }
+cuartoDeLibra = Hamburguesa { precioBase = 20, ingredientes = [Pan,Carne,Cheddar,Pan] }
 
 precioFinal :: Hamburguesa -> Number
 precioFinal hamburguesa = sumatoriaIngredientes hamburguesa + precioBase hamburguesa
@@ -29,17 +29,26 @@ precioFinal hamburguesa = sumatoriaIngredientes hamburguesa + precioBase hamburg
 sumatoriaIngredientes :: Hamburguesa -> Number
 sumatoriaIngredientes hamburguesa = sum . map precioIngrediente $ ingredientes hamburguesa 
 
--- agrandar: cada vez que se agranda una hamburguesa se agrega otro ingrediente base
--- (por ahora, son Carne o Pollo), se elige el ingrediente base a agregar según lo que ya haya en la hamburguesa 
--- (si había carne se agrega carne, si había pollo se agrega pollo, si había ambos da igual cuál se agregue).
-agrandar :: Hamburguesa -> Ingrediente -> Hamburguesa
-agrandar hamburguesa ingredienteBase
-    | ingredienteBase == Carne || ingredienteBase == Pollo = 
-        hamburguesa {ingredientes = agregarIngrediente ingredienteBase (ingredientes hamburguesa)}
-    | otherwise = hamburguesa
+agrandar :: Hamburguesa -> Hamburguesa
+agrandar hamburguesa
+    | Carne `elem` ingredientes hamburguesa = 
+        hamburguesa {ingredientes = agregarSegundo Carne (ingredientes hamburguesa)}
+    | otherwise = 
+        hamburguesa {ingredientes = agregarSegundo Pollo (ingredientes hamburguesa)}
 
-agregarIngrediente :: Ingrediente -> [Ingrediente] -> [Ingrediente]
-agregarIngrediente ingrediente listaIngredientes = ingrediente : listaIngredientes
+agregarSegundo :: Ingrediente -> [Ingrediente] -> [Ingrediente]
+agregarSegundo ingrediente (cabeza:cola) = cabeza : ingrediente : cola 
+
+-- Version previa de agrandar
+-- agrandar :: Hamburguesa -> Ingrediente -> Hamburguesa
+-- agrandar hamburguesa ingredienteBase
+--     | ingredienteBase == Carne || ingredienteBase == Pollo = 
+--         hamburguesa {ingredientes = agregarIngrediente ingredienteBase (ingredientes hamburguesa)}
+--     | otherwise = hamburguesa
+
+-- agregarIngrediente :: Ingrediente -> [Ingrediente] -> [Ingrediente]
+-- agregarIngrediente ingrediente listaIngredientes = ingrediente : listaIngredientes
 
 descuento :: Number -> Hamburguesa -> Hamburguesa
 descuento porcentaje hamburguesa = hamburguesa {precioBase = precioBase hamburguesa - (precioBase hamburguesa * porcentaje / 100)}
+
