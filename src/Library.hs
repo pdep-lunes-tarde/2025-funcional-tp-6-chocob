@@ -42,7 +42,10 @@ agrandar hamburguesa
         agregarIngrediente Pollo hamburguesa
 
 agregarIngrediente :: Ingrediente -> Hamburguesa -> Hamburguesa
-agregarIngrediente ingrediente hamburguesa = hamburguesa {ingredientes = agregarSegundo ingrediente (ingredientes hamburguesa)}
+agregarIngrediente ingrediente hamburguesa
+    | ingrediente == Papas = hamburguesa {ingredientes = Papas : ingredientes hamburguesa}
+    | otherwise = hamburguesa {ingredientes = agregarSegundo ingrediente (ingredientes hamburguesa)}
+
 
 agregarSegundo :: Ingrediente -> [Ingrediente] -> [Ingrediente]
 agregarSegundo ingrediente (cabeza:cola) = cabeza : ingrediente : cola 
@@ -72,3 +75,6 @@ dobleCuarto = agregarIngrediente Cheddar . agrandar $ cuartoDeLibra
 
 bigPdep :: Hamburguesa
 bigPdep = agregarIngrediente Curry dobleCuarto
+
+delDia :: Hamburguesa -> Hamburguesa
+delDia = agregarIngrediente Papas . descuento 30
