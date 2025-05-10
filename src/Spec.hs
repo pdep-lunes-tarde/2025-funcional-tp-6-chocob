@@ -22,6 +22,9 @@ suiteDeTestsParte1 = describe "Hamburguesas" $ do
             agrandar cuartoDeLibra `shouldBe` cuartoDeLibra {ingredientes = [Pan,Carne,Carne,Cheddar,Pan]}
         it "Dada una hamburguesa de pollo retorna la hamburguesa con un pollo adicional en su lista de ingredientes" $ do
             agrandar mcPollo `shouldBe` mcPollo {ingredientes = [Pan,Pollo, Pollo,QuesoDeAlmendras,Pan]}
+    describe "agregarIngrediente" $ do
+        it "Dado un ingrediente y una hamburguesa retorna la hamburguesa con el ingrediente agregado" $ do
+            agregarIngrediente Panceta cuartoDeLibra `shouldBe` cuartoDeLibra {ingredientes = [Pan,Panceta,Carne,Cheddar,Pan]}
     describe "descuento" $ do
         it "Dada una hamburguesa y un portentaje retorna la hamburguesa con el precio base actualizado" $ do
             descuento 10 cuartoDeLibra `shouldBe` cuartoDeLibra {precioBase = 18}
