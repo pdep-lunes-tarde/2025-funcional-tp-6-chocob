@@ -8,7 +8,7 @@ import Control.Exception (evaluate)
 correrTests :: IO ()
 correrTests = hspec $ do
     suiteDeTestsParte1
-    -- suiteDeTestsParte2
+    suiteDeTestsParte2
     -- suiteDeTestsParte3
 
 suiteDeTestsParte1 = describe "Hamburguesas" $ do
@@ -28,18 +28,25 @@ suiteDeTestsParte1 = describe "Hamburguesas" $ do
     describe "descuento" $ do
         it "Dada una hamburguesa y un portentaje retorna la hamburguesa con el precio base actualizado" $ do
             descuento 10 cuartoDeLibra `shouldBe` cuartoDeLibra {precioBase = 18}
-<<<<<<< HEAD
     describe "pdepBurger" $ do
         it "El precio final de la pdepBurger deberia ser 110 " $ do
             precioFinal pdepBurger `shouldBe` 110
-    describe "dobleCuarto" $ do
-        it "El precio final de la dobleCuarto deberia ser 84 " $ do
-            precioFinal dobleCuarto `shouldBe` 84
-    describe "bigPdep" $ do
-        it "El precio final de la bigPdep deberia ser 89 " $ do
-            precioFinal bigPdep `shouldBe` 89
-=======
-    describe "la pdpBurger" $ do
         it "Dado un cuarto de libra y un descuento del 20% retorna un cuarto de libra con descuento aplicado, agrandada dos veces y con panceta y cheddar agregados" $ do
-            pdpBurger `shouldBe` cuartoDeLibra {precioBase = 16, ingredientes = [Pan, Cheddar, Carne, Panceta, Carne, Carne, Cheddar, Pan]}
->>>>>>> d07a1fcd5797c7903968252aca09be9b97456267
+            pdepBurger `shouldBe` cuartoDeLibra {precioBase = 16, ingredientes = [Pan, Cheddar, Carne, Panceta, Carne, Carne, Cheddar, Pan]}
+   
+suiteDeTestsParte2 = describe "Hamburguesas" $ do  
+    describe "dobleCuarto" $ do
+        it "El precio final de la Doble Cuarto deberia ser 84 " $ do
+            precioFinal dobleCuarto `shouldBe` 84
+        it "Un Boble cuarto un Cuarto de Libra con carne y cheddar" $ do
+            dobleCuarto `shouldBe` cuartoDeLibra {precioBase = 20, ingredientes = [Pan,Cheddar, Carne, Carne, Cheddar, Pan]}
+    describe "bigPdep" $ do
+        it "El precio final de la Big Pdep deberia ser 89 " $ do
+            precioFinal bigPdep `shouldBe` 89
+        it "Una Big Pdep es un Doble Cuarto con curry agregado" $ do
+            bigPdep `shouldBe` cuartoDeLibra {precioBase = 20, ingredientes = [Pan, Curry, Cheddar, Carne, Carne, Cheddar, Pan]}
+    describe "delDia" $ do
+        it "Dada una hamburguesa en promocion, retorna la hamburguesa con papas y con un descuento del 30% al precio base" $ do
+            delDia bigPdep `shouldBe` bigPdep {precioBase = 14, ingredientes = [Papas, Pan, Curry, Cheddar, Carne, Carne, Cheddar, Pan]}
+        it "una Doble Cuarto en promocion vale 88" $ do
+            precioFinal (delDia dobleCuarto) `shouldBe` 88
