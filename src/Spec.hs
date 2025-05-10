@@ -28,3 +28,12 @@ suiteDeTestsParte1 = describe "Hamburguesas" $ do
     describe "descuento" $ do
         it "Dada una hamburguesa y un portentaje retorna la hamburguesa con el precio base actualizado" $ do
             descuento 10 cuartoDeLibra `shouldBe` cuartoDeLibra {precioBase = 18}
+    describe "pdepBurger" $ do
+        it "El precio final de la pdepBurger deberia ser 110 " $ do
+            precioFinal pdepBurger `shouldBe` 110
+    describe "dobleCuarto" $ do
+        it "El precio final de la dobleCuarto deberia ser 84 " $ do
+            precioFinal dobleCuarto `shouldBe` 84
+    describe "bigPdep" $ do
+        it "El precio final de la bigPdep deberia ser 89 " $ do
+            precioFinal bigPdep `shouldBe` 89

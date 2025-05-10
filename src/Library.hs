@@ -3,7 +3,7 @@ import PdePreludat
 import GHC.IO.Handle.Types (Handle__(haBufferMode))
 
 data Ingrediente =
-    Carne | Pan | Panceta | Cheddar | Pollo | Curry | QuesoDeAlmendras
+    Carne | Pan | Panceta | Cheddar | Pollo | Curry | QuesoDeAlmendras | Papas | BaconDeTofu | PatiVegano | PanIntegral
     deriving (Eq, Show)
 
 precioIngrediente :: Ingrediente -> Number
@@ -14,6 +14,11 @@ precioIngrediente Cheddar = 10
 precioIngrediente Pollo =  10
 precioIngrediente Curry = 5
 precioIngrediente QuesoDeAlmendras = 15
+precioIngrediente Papas = 10
+precioIngrediente BaconDeTofu = 12
+precioIngrediente PatiVegano = 10
+precioIngrediente PanIntegral = 3
+
 
 data Hamburguesa = Hamburguesa {
     precioBase :: Number,
@@ -59,3 +64,11 @@ agregarSegundo ingrediente (cabeza:cola) = cabeza : ingrediente : cola
 descuento :: Number -> Hamburguesa -> Hamburguesa
 descuento porcentaje hamburguesa = hamburguesa {precioBase = precioBase hamburguesa - (precioBase hamburguesa * porcentaje / 100)}
 
+pdepBurger :: Hamburguesa
+pdepBurger = descuento 20 . agregarIngrediente Cheddar . agregarIngrediente Panceta . agrandar . agrandar $ cuartoDeLibra
+
+dobleCuarto :: Hamburguesa
+dobleCuarto = agregarIngrediente Cheddar . agregarIngrediente Carne $ cuartoDeLibra
+
+bigPdep :: Hamburguesa
+bigPdep = agregarIngrediente Curry dobleCuarto
