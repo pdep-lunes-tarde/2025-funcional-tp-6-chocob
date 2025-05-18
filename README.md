@@ -11,16 +11,13 @@
 
 ## Equipo
 
-- Nombre del grupo
+- Nombre del grupo: Chocobo
 
-- Legajo: **Completar**
-- Nombre: **Completar**
+- Legajo: 220.857-0
+- Nombre: Franco Neme
 
-- Legajo: **Completar**
-- Nombre: **Completar**
-
-- Legajo: **Completar**
-- Nombre: **Completar**
+- Legajo: 220.683-3
+- Nombre: Santiago Moretti Murillo
 
 
 ## El enunciado
